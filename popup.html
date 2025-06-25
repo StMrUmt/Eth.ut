@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Eth.ut</title>
+  <style>
+    body {
+      width: 350px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      transition: background 0.3s, color 0.3s;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      position: relative;
+      margin-bottom: 10px;
+      gap: 10px;
+    }
+    .wallet-title {
+      flex: 1;
+      text-align: center;
+      font-size: 1.4em;
+      font-weight: bold;
+      letter-spacing: 1px;
+      z-index: 1;
+      font-family: Arial, sans-serif;
+    }
+    .theme-toggle-switch {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 2;
+      padding: 0;
+      height: 28px;
+    }
+    .toggle-track {
+      width: 36px;
+      height: 20px;
+      background: #23272f;
+      border-radius: 10px;
+      border: 1px solid #444;
+      position: relative;
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .theme-toggle-switch.dark .toggle-track {
+      background: #f5f5f5;
+      border: 1px solid #bbb;
+    }
+    .toggle-thumb {
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: left 0.3s, background 0.3s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .theme-toggle-switch.dark .toggle-thumb {
+      left: 18px;
+      background: #23272f;
+    }
+    .theme-toggle-switch .icon {
+      font-size: 16px;
+      user-select: none;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 20px;
+    }
+    .theme-toggle-switch .icon.sun {
+      color: #fbc02d;
+    }
+    .theme-toggle-switch .icon.moon {
+      color: #1976D2;
+    }
+    /* Light Theme */
+    .light-theme {
+      background: #fff;
+      color: #222;
+    }
+    .light-theme .address {
+      background: #f5f5f5;
+    }
+    .light-theme .tab-button.active {
+      background: #4CAF50;
+      color: #fff;
+    }
+    .light-theme .tab-button {
+      background: #f0f0f0;
+      color: #333;
+    }
+    .light-theme .copy-button {
+      background: #2196F3;
+      color: #fff;
+    }
+    .light-theme .copy-button:hover {
+      background: #1976D2;
+    }
+    /* Dark Theme */
+    .dark-theme {
+      background: #181a20;
+      color: #f5f5f5;
+    }
+    .dark-theme .address {
+      background: #23272f;
+    }
+    .dark-theme .tab-button.active {
+      background: #4CAF50;
+      color: #fff;
+    }
+    .dark-theme .tab-button {
+      background: #23272f;
+      color: #f5f5f5;
+    }
+    .dark-theme .copy-button {
+      background: #1976D2;
+      color: #fff;
+    }
+    .dark-theme .copy-button:hover {
+      background: #2196F3;
+    }
+    /* Common Styles */
+    .balance {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .address {
+      word-break: break-all;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      margin: 5px 0;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    input {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      width: 100%;
+      margin: 5px 0;
+    }
+    .tab {
+      display: none;
+    }
+    .tab.active {
+      display: block;
+    }
+    .tab-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .tab-button {
+      flex: 1;
+    }
+    .qr-code {
+      text-align: center;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header-bar">
+      <button class="theme-toggle-switch light" id="themeToggleSwitch" aria-label="Toggle theme">
+        <span class="icon sun">☀️</span>
+        <span class="toggle-track">
+          <span class="toggle-thumb"></span>
+        </span>
+        <span class="icon moon">🌙</span>
+      </button>
+      <div class="wallet-title" id="walletTitle">Eth.ut</div>
+    </div>
+    <div class="balance">
+      <span id="balance">0.00</span> ETH
+    </div>
+    <div class="tab-buttons">
+      <button class="tab-button" data-tab="send">Send</button>
+      <button class="tab-button" data-tab="deposit">Deposit</button>
+      <button class="tab-button" data-tab="history">History</button>
+    </div>
+    <div id="charts" class="tab active">
+      <h3>ETH Outflow</h3>
+      <canvas id="outflowChart" width="300" height="150"></canvas>
+      <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+        <button id="monthlyChartBtn">Monthly</button>
+        <button id="yearlyChartBtn">Yearly</button>
+      </div>
+    </div>
+    <div id="send" class="tab">
+      <input type="text" id="recipientAddress" placeholder="Recipient Address">
+      <input type="number" id="amount" placeholder="Amount (ETH)">
+      <button id="sendButton">Send</button>
+    </div>
+    <div id="deposit" class="tab">
+      <div class="qr-code">
+        <canvas id="qrcode"></canvas>
+        <p>Scan QR code to deposit ETH</p>
+      </div>
+      <div class="address">
+        <strong>Your Deposit Address:</strong>
+        <span id="depositAddress"></span>
+        <button class="copy-button" id="copyDepositAddress">Copy Address</button>
+      </div>
+      <p style="font-size: 12px; color: #666;">
+        Send ETH to this address. Make sure you're sending ETH on the Ethereum network.<br>
+        Minimum deposit: 0.01 ETH
+      </p>
+    </div>
+    <div id="history" class="tab">
+      <h3>Transaction History</h3>
+      <div id="transactionHistory"></div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html> 

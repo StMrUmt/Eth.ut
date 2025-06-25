@@ -1,0 +1,36 @@
+Eth.ut Cüzdanı Gizlilik Politikası
+
+Son güncelleme: [Tarih ekleyin]
+
+1. Hangi Verileri Topluyoruz?
+Eth.ut cüzdanı, kullanıcıdan hiçbir kişisel veri, e-posta, isim veya cihaz bilgisi toplamaz.
+Cüzdan anahtarı (private key) ve işlem geçmişi, sadece kullanıcının kendi tarayıcısında, şifrelenmemiş olarak saklanır ve geliştirici dahil kimseyle paylaşılmaz.
+
+2. Fee (Ücret) Politikası
+- Kullanıcı, cüzdan üzerinden her transfer yaptığında, belirlenen miktarda (şu anda 0.005 ETH) fee otomatik olarak geliştiriciye ait merkezi cüzdan adresine gönderilir.
+- Fee adresi: 0x969a91a929bcda9373f1e29fdf25a9ab5cbfa757
+- Bu fee, transfer işlemi sırasında otomatik olarak alınır ve kullanıcıya ayrıca bildirilir.
+
+3. Transfer Süreçleri
+- Kullanıcı, cüzdanı ilk açtığında kendisine özel bir Ethereum cüzdanı oluşturulur.
+- Tüm transferler doğrudan Ethereum ağı üzerinden gerçekleşir.
+- Transfer edilen varlıklar ve bakiyeler, merkezi sunucularda değil, tamamen blockchain üzerinde ve kullanıcının cüzdanında tutulur.
+- Cüzdan anahtarı (private key) sadece kullanıcının tarayıcısında saklanır, geliştirici veya üçüncü kişilerle paylaşılmaz.
+
+4. Güvenlik
+- Cüzdan anahtarı (private key) yalnızca kullanıcının tarayıcısında saklanır ve dışarıya aktarılmaz.
+- Kullanıcı, cüzdan anahtarını veya seed phrase'ini kimseyle paylaşmamalıdır.
+- Eklenti, kullanıcıdan hiçbir şekilde şifre, e-posta veya kişisel bilgi talep etmez.
+- Fee işlemleri dışında, hiçbir şekilde kullanıcıdan veya cüzdandan başka bir adrese transfer yapılmaz.
+
+5. Üçüncü Taraf Servisler
+- Eklenti, Ethereum ağına bağlanmak için Alchemy gibi üçüncü taraf node sağlayıcılarını kullanır.
+- Bu servisler üzerinden yapılan işlemler, sadece blockchain ile ilgili teknik verileri kapsar ve kişisel veri içermez.
+
+6. Sorumluluk Reddi
+- Kullanıcı, cüzdan anahtarını kaybederse veya başka biriyle paylaşırsa, geliştirici bu konuda sorumluluk kabul etmez.
+- Fee adresine gönderilen ücretler iade edilmez.
+- Kullanıcı, cüzdanı kullanarak yaptığı tüm işlemlerden kendisi sorumludur.
+
+7. İletişim
+Herhangi bir soru veya destek talebi için [e-posta adresinizi ekleyin] üzerinden iletişime geçebilirsiniz. 
